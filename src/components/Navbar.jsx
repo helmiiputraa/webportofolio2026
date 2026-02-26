@@ -53,10 +53,15 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "theme-glass" : ""
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
+          background: isScrolled
+            ? isDark
+              ? "rgba(10, 14, 26, 0.85)"
+              : "rgba(240, 244, 255, 0.85)"
+            : "transparent",
+          backdropFilter: isScrolled ? "blur(20px)" : "none",
+          WebkitBackdropFilter: isScrolled ? "blur(20px)" : "none",
           borderBottom: isScrolled
             ? `1px solid ${isDark ? "rgba(59,130,246,0.1)" : "rgba(37,99,235,0.08)"}`
             : "1px solid transparent",
