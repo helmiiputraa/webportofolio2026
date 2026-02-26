@@ -208,49 +208,75 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Full Screen Overlay */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed left-4 right-4 z-40 theme-glass rounded-2xl p-5 lg:hidden"
-            style={{ top: "80px" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35 }}
+            className="fixed inset-0 z-40 lg:hidden flex flex-col items-center justify-center"
+            style={{
+              background: isDark
+                ? "rgba(5, 8, 18, 0.92)"
+                : "rgba(0, 0, 0, 0.88)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+            }}
           >
-            <div className="flex flex-col gap-1">
+            <nav className="flex flex-col items-center gap-2">
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ delay: i * 0.07, duration: 0.3 }}
                   onClick={() => scrollTo(link.href)}
-                  className={`w-full text-left px-4 py-3.5 rounded-xl text-base font-medium transition-all duration-300 cursor-pointer ${
-                    activeSection === link.href.slice(1)
-                      ? "theme-text-accent theme-bg-card"
-                      : "theme-text-secondary"
-                  }`}
+                  className="cursor-pointer"
+                  style={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontSize: "1.25rem",
+                    fontWeight: 500,
+                    padding: "0.85rem 2rem",
+                    color:
+                      activeSection === link.href.slice(1)
+                        ? "#3b82f6"
+                        : "rgba(255,255,255,0.75)",
+                    background: "transparent",
+                    border: "none",
+                    letterSpacing: "0.02em",
+                    transition: "color 0.3s ease",
+                  }}
                 >
                   {link.name}
                 </motion.button>
               ))}
-              {/* Mobile CV Button */}
+
+              {/* Download CV Button */}
               <motion.a
                 href={personalInfo.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.05 }}
-                className="flex items-center justify-center gap-2 px-4 py-3.5 rounded-full text-base font-semibold text-white mt-3"
-                style={{ background: "linear-gradient(135deg, #3b82f6, #1e3a8a)" }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ delay: navLinks.length * 0.07, duration: 0.3 }}
+                className="flex items-center justify-center gap-2 text-white font-semibold mt-6"
+                style={{
+                  fontFamily: "'Outfit', sans-serif",
+                  fontSize: "1.05rem",
+                  padding: "0.9rem 2.5rem",
+                  borderRadius: "9999px",
+                  background: "linear-gradient(135deg, #3b82f6, #1e3a8a)",
+                  boxShadow: "0 4px 20px rgba(59,130,246,0.4)",
+                }}
               >
                 <HiDocumentArrowDown className="text-lg" />
                 Download CV
               </motion.a>
-            </div>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>

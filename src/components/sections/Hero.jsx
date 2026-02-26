@@ -156,7 +156,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.6 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-5"
+              className="flex flex-nowrap items-center justify-center lg:justify-start gap-3 sm:gap-5"
               style={{ marginTop: "2rem" }}
             >
               <motion.button
@@ -255,8 +255,8 @@ export default function Hero() {
               <motion.div
                 className="relative overflow-hidden"
                 style={{
-                  width: "clamp(340px, 30vw, 480px)",
-                  height: "clamp(340px, 30vw, 480px)",
+                  width: "clamp(220px, 30vw, 480px)",
+                  height: "clamp(220px, 30vw, 480px)",
                   borderRadius: "50%",
                   border: `3px solid ${isDark ? "rgba(59,130,246,0.25)" : "rgba(37,99,235,0.2)"}`,
                   boxShadow: isDark
@@ -328,25 +328,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 theme-text-secondary cursor-pointer"
-          onClick={() =>
-            document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
-          }
-        >
-          <span className="text-xs font-medium tracking-widest uppercase">Scroll Down</span>
-          <HiArrowDown className="text-xl theme-text-accent" />
-        </motion.div>
-      </motion.div>
+
     </section>
   );
 }
